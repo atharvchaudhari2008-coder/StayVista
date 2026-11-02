@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayVista | Luxury Room & Hotel Booking</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            padding: 0.5rem 1.25rem;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 8px;
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)), 
+                        url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            opacity: 0.95;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Search Bar */
+        .search-container {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+            width: 90%;
+            margin: -50px auto 3rem auto;
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .input-group input, .input-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--white);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary);
+            color: var(--white);
+            border-color: var(--secondary);
+        }
+
+        /* Room Grid */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .room-img-wrapper {
+            position: relative;
+            height: 220px;
+        }
+
+        .room-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .room-rating {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--white);
+            color: var(--secondary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .room-rating i {
+            color: var(--accent);
+        }
+
+        .room-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .room-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .room-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+        }
+
+        .room-amenities {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .room-amenities span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .room-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-box .price {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .price-box .per-night {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: none;
+            border: none;
+            font-size: 2.5rem;
+            width: 48px;
+            height: 48px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bill-summary {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .bill-total {
+            border-top: 1px solid var(--border);
+            padding-top: 0.5rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+
+        /* Room interior gallery */
+        .room-img-wrapper { cursor: pointer; }
+        .room-img-wrapper a { display: block; width: 100%; height: 100%; }
+        .gallery-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.88);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .gallery-panel {
+            background: var(--white);
+            width: min(1050px, 100%);
+            max-height: 95vh;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 24px;
+            position: relative;
+        }
+        .gallery-close {
+            position: absolute;
+            right: 18px;
+            top: 12px;
+            border: 0;
+            background: transparent;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--text-main);
+            z-index: 2;
+        }
+        .gallery-heading { padding-right: 40px; margin-bottom: 16px; }
+        .gallery-heading h2 { color: var(--secondary); margin-bottom: 4px; }
+        .gallery-main-wrap { position: relative; }
+        .gallery-main-image {
+            display: block;
+            width: 100%;
+            height: min(58vh, 540px);
+            object-fit: cover;
+            border-radius: 10px;
+            background: var(--bg-light);
+        }
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,.92);
+            color: var(--secondary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .gallery-prev { left: 14px; }
+        .gallery-next { right: 14px; }
+        .gallery-counter { text-align: right; color: var(--text-muted); font-size: .9rem; margin-top: 8px; }
+        .gallery-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 12px 0; }
+        .gallery-thumbnails img {
+            width: 115px;
+            height: 78px;
+            object-fit: cover;
+            border-radius: 7px;
+            cursor: pointer;
+            border: 3px solid transparent;
+            flex: 0 0 auto;
+        }
+        .gallery-thumbnails img.active { border-color: var(--primary); }
+        .gallery-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            margin-top: 5px;
+        }
+        .gallery-price { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+        .gallery-price small { font-size: .85rem; color: var(--text-muted); font-weight: 400; }
+        .gallery-amenities { color: var(--text-muted); margin-top: 5px; font-size: .9rem; }
+        @media(max-width: 600px) {
+            .gallery-panel { padding: 16px; }
+            .gallery-main-image { height: 300px; }
+            .gallery-thumbnails img { width: 85px; height: 65px; }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 3rem 5% 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+
+        /* StayVista Luxury Collection - merged design */
+        .luxury-intro {
+            background: #f5f2eb;
+            padding: 75px 5%;
+            text-align: center;
+            margin-top: 35px;
+        }
+        .luxury-kicker {
+            color: #b77943;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+        .luxury-intro h2, .luxury-heading {
+            color: #102c3a;
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            margin: 12px 0 16px;
+        }
+        .luxury-intro p {
+            max-width: 780px;
+            margin: auto;
+            color: #64748b;
+            line-height: 1.9;
+        }
+        .luxury-amenities {
+            padding: 70px 5%;
+            background: #fff;
+        }
+        .luxury-center { text-align: center; }
+        .luxury-amenity-grid {
+            max-width: 1100px;
+            margin: 38px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+        .luxury-amenity {
+            padding: 25px 18px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .luxury-amenity .lux-icon {
+            font-size: 27px;
+            color: #c18a56;
+            margin-bottom: 12px;
+        }
+        .luxury-amenity h3 {
+            color: #102c3a;
+            font-size: .9rem;
+            margin-bottom: 7px;
+        }
+        .luxury-amenity p {
+            color: #64748b;
+            font-size: .82rem;
+            line-height: 1.6;
+        }
+        .luxury-featured {
+            background: #f8fafc;
+            padding: 75px 5%;
+        }
+        .luxury-suite-grid {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+        .luxury-suite-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(15,23,42,.08);
+        }
+        .luxury-suite-card img {
+            width: 100%;
+            height: 255px;
+            object-fit: cover;
+            display: block;
+        }
+        .luxury-suite-info { padding: 25px; }
+        .luxury-suite-info h3 {
+            font: 500 1.6rem Georgia, serif;
+            color: #102c3a;
+            margin: 8px 0 10px;
+        }
+        .luxury-suite-info p {
+            color: #64748b;
+            font-size: .92rem;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+        .luxury-suite-meta {
+            color: #475569;
+            font-size: .82rem;
+            margin-bottom: 18px;
+        }
+        .luxury-suite-meta span { margin-right: 15px; }
+        .luxury-link {
+            display: inline-block;
+            color: #1d4ed8;
+            font-weight: 700;
+            font-size: .85rem;
+            text-decoration: none;
+        }
+        .luxury-photo-section { padding: 75px 5%; background: #fff; }
+        .luxury-photo-grid {
+            max-width: 1150px;
+            margin: 35px auto 0;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 180px 180px;
+            gap: 12px;
+        }
+        .luxury-photo-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 9px;
+        }
+        .luxury-photo-grid img:first-child { grid-row: span 2; }
+        .luxury-book-banner {
+            padding: 70px 5%;
+            text-align: center;
+            color: white;
+            background: linear-gradient(rgba(15,23,42,.75),rgba(15,23,42,.75)),
+            url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1800&q=85') center/cover;
+        }
+        .luxury-book-banner h2 {
+            font: 500 clamp(2rem,4vw,3rem) Georgia,serif;
+            margin: 10px 0;
+        }
+        .luxury-book-banner p { margin: 0 auto 22px; max-width: 650px; line-height: 1.8; }
+        .luxury-book-banner a {
+            display: inline-block;
+            background: #f59e0b;
+            color: #102c3a;
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        @media(max-width: 800px) {
+            .luxury-amenity-grid { grid-template-columns: repeat(2,1fr); }
+            .luxury-suite-grid { grid-template-columns: 1fr; }
+        }
+        @media(max-width: 550px) {
+            .luxury-photo-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 170px 130px 130px;
+            }
+            .luxury-photo-grid img:first-child { grid-column: span 2; grid-row: auto; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo"><i class="fa-solid fa-hotel"></i> StayVista</a>
+        <ul class="nav-links">
+            <li><a href="#rooms">Explore Rooms</a></li>
+            <li><a href="#luxury-collection">Luxury Collection</a></li>
+            <li><a href="#luxury-amenities">Amenities</a></li>
+            <li><a href="#luxury-gallery">Gallery</a></li>
+            <li><a href="#contact">Support</a></li>
+        </ul>
+        <button class="btn-outline" onclick="alert('Bookings History panel coming soon!')">My Bookings</button>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1>Find Your Next Perfect Stay</h1>
+        <p>Book handpicked luxury rooms, boutique suites, and weekend retreats across India at the best prices.</p>
+    </section>
+
+    <!-- Search Widget -->
+    <div class="search-container">
+        <div class="input-group">
+            <label><i class="fa-solid fa-location-dot"></i> Location</label>
+            <select id="searchLocation">
+                <option value="All">All Locations</option>
+                <option value="Pune">Pune</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Goa">Goa</option>
+                <option value="Lonavala">Lonavala</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label><i class="fa-regular fa-calendar"></i> Check-in</label>
+            <input type="date" id="checkInDate">
+        </div>
+        <div class="input-group">
+            <label><i class="fa-regular fa-calendar-check"></i> Check-out</label>
+            <input type="date" id="checkOutDate">
+        </div>
+        <div class="input-group">
+            <label><i class="fa-solid fa-user-group"></i> Guests</label>
+            <select id="guestCount">
+                <option value="1">1 Adult</option>
+                <option value="2" selected>2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4+ Family</option>
+            </select>
+        </div>
+        <button class="btn-primary" onclick="filterRooms()">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="rooms">
+        <div class="section-header">
+            <div>
+                <h2>Featured Rooms & Suites</h2>
+                <p style="color: var(--text-muted)">Verified properties with instant booking confirmation</p>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterByCategory('All', this)">All Rooms</button>
+                <button class="filter-btn" onclick="filterByCategory('Deluxe', this)">Deluxe</button>
+                <button class="filter-btn" onclick="filterByCategory('Suite', this)">Luxury Suite</button>
+                <button class="filter-btn" onclick="filterByCategory('Villa', this)">Private Villa</button>
+            </div>
+        </div>
+
+        <!-- Dynamic Room Grid -->
+        <div class="room-grid" id="roomGrid"></div>
+    </div>
+
+
+
+    <!-- Luxury Collection section merged into the original StayVista booking website -->
+    <section class="luxury-intro" id="luxury-collection">
+        <div class="luxury-kicker">StayVista Signature Experience</div>
+        <h2>Luxury, with room to breathe.</h2>
+        <p>Discover thoughtfully selected rooms, private villas and spacious suites.
+        Enjoy beautiful interiors, memorable views and warm hospitality. Explore our
+        luxury collection and choose the stay that suits your next escape.</p>
+    </section>
+
+    <section class="luxury-amenities" id="luxury-amenities">
+        <div class="luxury-center">
+            <div class="luxury-kicker">Thoughtful details</div>
+            <h2 class="luxury-heading">The little luxuries</h2>
+        </div>
+        <div class="luxury-amenity-grid">
+            <div class="luxury-amenity"><div class="lux-icon">☕</div><h3>In-room comforts</h3><p>Relax with thoughtful essentials and refreshments.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">♧</div><h3>Private balconies</h3><p>Enjoy fresh air and beautiful surroundings.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">✧</div><h3>Premium bedding</h3><p>Comfortable beds and soft, quality linens.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">⌁</div><h3>Free Wi-Fi</h3><p>Stay connected throughout your visit.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">♨</div><h3>Modern bathrooms</h3><p>Clean, spacious and refreshing facilities.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">♡</div><h3>Warm hospitality</h3><p>Friendly support during your stay.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">☼</div><h3>Poolside moments</h3><p>Unwind at selected properties with pools.</p></div>
+            <div class="luxury-amenity"><div class="lux-icon">⌂</div><h3>Private spaces</h3><p>Find room to relax with family and friends.</p></div>
+        </div>
+    </section>
+
+    <section class="luxury-featured">
+        <div class="luxury-center">
+            <div class="luxury-kicker">Find your perfect escape</div>
+            <h2 class="luxury-heading">Explore our signature stays</h2>
+        </div>
+        <div class="luxury-suite-grid">
+            <article class="luxury-suite-card">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1100&q=85" alt="Luxury suite interior">
+                <div class="luxury-suite-info"><div class="luxury-kicker">01 · Elegant stays</div><h3>Luxury Suites</h3>
+                <p>Spacious interiors, stylish details and comfortable spaces for a relaxing getaway.</p>
+                <div class="luxury-suite-meta"><span>✦ Premium interiors</span><span>✦ Modern comforts</span></div>
+                <a class="luxury-link" href="#rooms" onclick="filterByCategory('Suite', document.querySelectorAll('.filter-btn')[2])">Explore luxury suites →</a></div>
+            </article>
+            <article class="luxury-suite-card">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1100&q=85" alt="Private villa with swimming pool">
+                <div class="luxury-suite-info"><div class="luxury-kicker">02 · Private escapes</div><h3>Private Villas</h3>
+                <p>Enjoy more privacy, generous living spaces and selected villas with private pools.</p>
+                <div class="luxury-suite-meta"><span>✦ Private spaces</span><span>✦ Pool options</span></div>
+                <a class="luxury-link" href="#rooms" onclick="filterByCategory('Villa', document.querySelectorAll('.filter-btn')[3])">Explore private villas →</a></div>
+            </article>
+            <article class="luxury-suite-card">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1100&q=85" alt="Resort swimming pool and hotel">
+                <div class="luxury-suite-info"><div class="luxury-kicker">03 · Leisure stays</div><h3>Resort Getaways</h3>
+                <p>Find a refreshing change of scene with inviting resort spaces and relaxing surroundings.</p>
+                <div class="luxury-suite-meta"><span>✦ Relaxation</span><span>✦ Scenic locations</span></div>
+                <a class="luxury-link" href="#rooms">Browse all stays →</a></div>
+            </article>
+            <article class="luxury-suite-card">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85" alt="Boutique hotel living room">
+                <div class="luxury-suite-info"><div class="luxury-kicker">04 · Boutique comfort</div><h3>Boutique Stays</h3>
+                <p>Discover charming rooms with character, comfort and details that make a stay special.</p>
+                <div class="luxury-suite-meta"><span>✦ Unique interiors</span><span>✦ Thoughtful design</span></div>
+                <a class="luxury-link" href="#rooms">Discover rooms →</a></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="luxury-photo-section" id="luxury-gallery">
+        <div class="luxury-center">
+            <div class="luxury-kicker">A closer look</div>
+            <h2 class="luxury-heading">Moments at StayVista</h2>
+        </div>
+        <div class="luxury-photo-grid">
+            <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=85" alt="Resort pool">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85" alt="Luxury room">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&q=85" alt="Living room">
+            <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=700&q=85" alt="Beach resort">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&q=85" alt="Private villa">
+        </div>
+    </section>
+
+    <section class="luxury-book-banner">
+        <div class="luxury-kicker">Your next escape awaits</div>
+        <h2>Make room for something special.</h2>
+        <p>Browse our collection of rooms, suites and private villas, then open a property gallery to see more photos and start your booking enquiry.</p>
+        <a href="#rooms">Find your stay</a>
+    </section>
+
+
+    <!-- Room Interior Gallery: opens on this same page -->
+    <div class="gallery-overlay" id="roomGallery" onclick="closeRoomGallery(event)">
+        <div class="gallery-panel" role="dialog" aria-modal="true" aria-label="Room photo gallery" onclick="event.stopPropagation()">
+            <button class="gallery-close" onclick="closeRoomGallery()" aria-label="Close gallery">&times;</button>
+            <div class="gallery-heading">
+                <h2 id="galleryRoomTitle">Room Details</h2>
+                <p id="galleryRoomLocation" style="color:var(--text-muted)"></p>
+            </div>
+            <div class="gallery-main-wrap">
+                <img id="galleryMainImage" class="gallery-main-image" src="" alt="Room interior">
+                <button class="gallery-arrow gallery-prev" onclick="changeGalleryPhoto(-1)" aria-label="Previous photo">&#10094;</button>
+                <button class="gallery-arrow gallery-next" onclick="changeGalleryPhoto(1)" aria-label="Next photo">&#10095;</button>
+            </div>
+            <div class="gallery-counter" id="galleryCounter"></div>
+            <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+            <div class="gallery-bottom">
+                <div>
+                    <div class="gallery-price" id="galleryRoomPrice"></div>
+                    <div class="gallery-amenities" id="galleryRoomAmenities"></div>
+                </div>
+                <button class="btn-primary" id="galleryBookButton" onclick="bookRoomFromGallery()">
+                    <i class="fa-solid fa-calendar-check"></i> Book This Room
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h3 id="modalRoomTitle">Book Room</h3>
+            <p id="modalRoomLocation" style="color: var(--text-muted); margin-bottom: 1rem;"></p>
+
+            <form id="bookingForm" onsubmit="confirmBooking(event)">
+                <div class="input-group" style="margin-bottom: 0.75rem;">
+                    <label>Full Name</label>
+                    <input type="text" id="custName" required placeholder="Enter your full name">
+                </div>
+                <div class="input-group" style="margin-bottom: 0.75rem;">
+                    <label>Email Address</label>
+                    <input type="email" id="custEmail" required placeholder="name@example.com">
+                </div>
+                <div class="input-group" style="margin-bottom: 0.75rem;">
+                    <label>Mobile Number (10-digit)</label>
+                    <input type="tel" id="custPhone" pattern="[0-9]{10}" required placeholder="9876543210">
+                </div>
+                <div class="input-group" style="margin-bottom: 0.75rem;">
+                    <label>Payment Method</label>
+                    <select required>
+                        <option value="UPI">UPI (GPay / PhonePe / Paytm)</option>
+                        <option value="Card">Credit / Debit Card</option>
+                        <option value="Hotel">Pay at Hotel</option>
+                    </select>
+                </div>
+
+                <div class="bill-summary">
+                    <div class="bill-row">
+                        <span id="billNightsText">₹0 x 1 Night</span>
+                        <span id="billBasePrice">₹0</span>
+                    </div>
+                    <div class="bill-row">
+                        <span>GST & Taxes (12%)</span>
+                        <span id="billTax">₹0</span>
+                    </div>
+                    <div class="bill-row bill-total">
+                        <span>Total Payable</span>
+                        <span id="billTotal">₹0</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">
+                    Confirm & Pay
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:25px;margin-bottom:25px;">
+            <div><h3 style="margin-bottom:8px;">StayVista</h3><p style="color:#94a3b8;">Luxury rooms, suites and private villa stays.</p></div>
+            <div><h4 style="margin-bottom:8px;">Explore</h4><p><a href="#rooms" style="color:#cbd5e1;">Rooms</a> &nbsp; | &nbsp; <a href="#luxury-collection" style="color:#cbd5e1;">Luxury Collection</a> &nbsp; | &nbsp; <a href="#luxury-gallery" style="color:#cbd5e1;">Gallery</a></p></div>
+            <div><h4 style="margin-bottom:8px;">Support</h4><p style="color:#94a3b8;">atharvchaudhari2008@gmail.com
+<br>yashgs2007@gmail.com</p></div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 StayVista Hospitality. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Room Database
+        const roomsData = [
+            {
+                id: 1,
+                title: "Royal Orchid Executive Room",
+                location: "Koregaon Park, Pune",
+                city: "Pune",
+                category: "Deluxe",
+                price: 34999,
+                rating: 4.8,
+                image: "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-3dae8b3a-ef02-4175-a812-543620952985.webp",
+                galleryImages: [
+                    "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-3dae8b3a-ef02-4175-a812-543620952985.webp",
+                    "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-1f40eccc-744f-476f-b8c1-8bedce1b5c09.webp",
+                    "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-c90f017a-45a8-4b29-b911-2e43ac34fd0b.webp",
+                    "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-6878cfc9-2415-4bd0-a498-31176767e2bf.webp",
+                    "https://dxgqgzkuwqe2h.cloudfront.net/3308/ce0df5cf-43c7-491c-bbc6-a74b9e094ff8/cf-009deff5-5fb7-4ad1-8360-39d3193e86f0.webp"
+                ],
+                amenities: ["Free Wi-Fi", "AC", "Breakfast", "King Bed"]
+            },
+            {
+                id: 2,
+                title: "Sea Breeze Luxury Suite",
+                location: "Marine Drive, Mumbai",
+                city: "Mumbai",
+                category: "Suite",
+                price: 79990,
+                rating: 4.9,
+                image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/913144531.jpg?k=d03516e132daeffb163077d979e41934d2aad52626b76b0b1a07ae9a622c1b83&o=",
+                galleryImages: [
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/913439365.jpg?k=9d84fd63f3df72af6a431c47aba57cdd72bb91302c4a77a27618f5c9b0a3e795&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/913144509.jpg?k=967294b4f1ae638be543498a5e85479564174334fa7c89009050011bd225653e&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/913439389.jpg?k=5944646fe6f76f75b1a1c5d0a35779a850012a7fd1883b71e3ae1d38c33950ae&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/913439389.jpg?k=5944646fe6f76f75b1a1c5d0a35779a850012a7fd1883b71e3ae1d38c33950ae&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/917311148.jpg?k=03d10c8b6209594b1a1704845af619bb91477934f1d01a72bc7e306652a702f6&o="
+                ],
+                amenities: ["Ocean View", "Mini Bar", "Jacuzzi", "Wi-Fi"]
+            },
+            {
+                id: 3,
+                title: "Mist Valley Pool Villa",
+                location: "Tiger Point Rd, Lonavala",
+                city: "Lonavala",
+                category: "Villa",
+                price: 95000,
+                rating: 4.7,
+                image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/639367635.jpg?k=e1e592fbcf4493209c8f255c6ed74c71445c960389f32bc16ded7d9c928cf690&o=",
+                galleryImages: [
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/412226180.jpg?k=093aff27e4518efe2a982ae439ee153cc7712b8fcf4b98b26937bdd8cc18b72a&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/412226201.jpg?k=130ee1aed40d38e8ec54e1302a5693d8a51e86a2adcc35d971a00093a45e95e6&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/412226190.jpg?k=c279069d6b9ab29b0d2e5ce213c9d226fb2f6470a476dc8da5f45066a5bbaafc&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/412226187.jpg?k=4e92fb31c487c53dc778ab5cbb1a1fbbb5d23061713ffe384bd757b6303a4a3e&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/412226129.jpg?k=2782e9c37baf501e9ba9cfc4b51d19a0e6c6ade7c743f50fb02b3816819d5546&o="
+                ],
+                amenities: ["Private Pool", "4 Guests", "Parking"]
+            },
+            {
+                id: 4,
+                title: "Palm Grove Boutique Stay",
+                location: "Candolim, Goa",
+                city: "Goa",
+                category: "Deluxe",
+                price: 42000,
+                rating: 4.6,
+                image: "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/CommonDzAPQE.jpg",
+                galleryImages: [
+                    "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/CommontIuMcz.jpg",
+                    "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/Commone9ZY3j.jpg",
+                    "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/CommonxcKX3b.jpg",
+                    "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/Commonec5XuV.jpg",
+                    "https://media.easemytrip.com/media/Hotel/SHL-2108692044111/Common/Common5Xfwbq.jpg"
+                ],
+                amenities: ["Beach Access", "AC", "Smart TV", "Balcony"]
+            },
+            {
+                id: 5,
+                title: "Skyline Presidential Suite",
+                location: "Candolim ,   Goa",
+                city: " Goa",
+                category: "Suite",
+                price: 62000,
+                rating: 4.9,
+                image: "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-04-twobedroomoceanfrontsuite-01-62f27ab6955ef.jpg",
+                galleryImages: [
+                    "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-04-twobedroomoceanfrontsuite-01-62f27ab6955ef.jpg",
+                    "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-02-oceanfrontjuniorsuite-01-62f27a53e82c3.jpg",
+                    "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-04-twobedroomoceanfrontsuite-02-62f27ab7c5335.jpg",
+                    "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-02-oceanfrontjuniorsuite-03-62f27a56b467c.jpg",
+                    "https://symphony.cdn.tambourine.com/sea-breeze-beach-house/media/seabreezebeachhouse-03_2-luxurycollection-04-twobedroomoceanfrontsuite-01-62f27ab6955ef.jpg"
+                ],
+                amenities: ["Airport Shuttle", "Lounge Access", "King Bed", "Wi-Fi"]
+            },
+            {
+                id: 6,
+                title: "Sunset Horizon Heritage Villa",
+                location: "Anjuna, Goa",
+                city: "Goa",
+                category: "Villa",
+                price: 112000,
+                rating: 4.9,
+                image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/203445214.jpg?k=cc4a3c5887df8a584c8857f60f82e33319d049922b7b27da91af3b91ae98418f&o=",
+                galleryImages: [
+                    " https://cf.bstatic.com/xdata/images/hotel/max1024x768/47911214.jpg?k=48b8a692883e84bb9d0d36b409d28ecbeac60adf2aacc8942a775dac3d2e95d1&o=  ",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/681921797.jpg?k=3cb05f5b9d803dd2ff7600e87da4b6320ca7e2f1c938d405e13f3fdbe49e15fe&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/47911203.jpg?k=f0ad78ba46abdfe07e35cfbe2f5dc7c493d47481b0bbb05d030937c80d1f0a1b&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/203446559.jpg?k=d4e96638d7cb7184abc4ac58d919f543b3c1407f4990f9f62b7040524fa5f328&o=",
+                    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/203445111.jpg?k=ea9116dba2c5d1225543bc72e1cbff8340ca4761262f3ef0c7f0504bf0665305&o="
+                   
+                ],
+                amenities: ["Private Lawn", "Pool","BBQ Setup", "Kitchen", "Caretaker"]
+            }
+        ];
+
+        let currentSelectedRoom = null;
+        let activeCategory = 'All';
+
+        // Set Default Dates (Today & Tomorrow)
+        window.onload = () => {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            document.getElementById('checkInDate').valueAsDate = today;
+            document.getElementById('checkOutDate').valueAsDate = tomorrow;
+
+            renderRooms(roomsData);
+        };
+
+        // Render Room Cards
+        function renderRooms(rooms) {
+            const grid = document.getElementById('roomGrid');
+            grid.innerHTML = '';
+
+            if (rooms.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-muted);">No rooms found matching your criteria.</p>`;
+                return;
+            }
+
+            rooms.forEach(room => {
+                const amenitiesHTML = room.amenities.map(item => `<span><i class="fa-solid fa-check" style="color: var(--primary);"></i> ${item}</span>`).join('');
+                
+                const card = `
+                    <div class="room-card">
+                        <div class="room-img-wrapper" onclick="openRoomGallery(${room.id})" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){openRoomGallery(${room.id})}">
+                            <img src="${room.image}" alt="${room.title}" class="room-img">
+                            <span class="room-badge">${room.category}</span>
+                            <span class="room-rating"><i class="fa-solid fa-star"></i> ${room.rating}</span>
+                        </div>
+                        <div class="room-content">
+                            <div class="room-location">
+                                <i class="fa-solid fa-location-dot"></i> ${room.location}
+                            </div>
+                            <h3 class="room-title">${room.title}</h3>
+                            <div class="room-amenities">
+                                ${amenitiesHTML}
+                            </div>
+                            <div class="room-footer">
+                                <div class="price-box">
+                                    <span class="price">₹${room.price.toLocaleString('en-IN')}</span>
+                                    <span class="per-night">/ night</span>
+                                </div>
+                                <button class="btn-primary" onclick="openRoomGallery(${room.id})">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+
+        // Room gallery on the same page
+        let galleryRoom = null;
+        let galleryPhotoIndex = 0;
+
+        function openRoomGallery(roomId) {
+            galleryRoom = roomsData.find(room => room.id === roomId);
+            if (!galleryRoom) return;
+            galleryPhotoIndex = 0;
+
+            document.getElementById('galleryRoomTitle').innerText = galleryRoom.title;
+            document.getElementById('galleryRoomLocation').innerText = galleryRoom.location;
+            document.getElementById('galleryRoomPrice').innerHTML = `₹${galleryRoom.price.toLocaleString('en-IN')} <small>/ night</small>`;
+            document.getElementById('galleryRoomAmenities').innerText = galleryRoom.amenities.join(' • ');
+            document.getElementById('roomGallery').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            renderGalleryPhoto();
+        }
+
+        function renderGalleryPhoto() {
+            if (!galleryRoom) return;
+            const photos = galleryRoom.galleryImages || [galleryRoom.image];
+            document.getElementById('galleryMainImage').src = photos[galleryPhotoIndex];
+            document.getElementById('galleryMainImage').alt = galleryRoom.title + ' interior photo ' + (galleryPhotoIndex + 1);
+            document.getElementById('galleryCounter').innerText = `${galleryPhotoIndex + 1} / ${photos.length}`;
+
+            const thumbs = document.getElementById('galleryThumbnails');
+            thumbs.innerHTML = '';
+            photos.forEach((photo, index) => {
+                const image = document.createElement('img');
+                image.src = photo;
+                image.alt = `Room photo ${index + 1}`;
+                if (index === galleryPhotoIndex) image.classList.add('active');
+                image.addEventListener('click', () => {
+                    galleryPhotoIndex = index;
+                    renderGalleryPhoto();
+                });
+                thumbs.appendChild(image);
+            });
+        }
+
+        function changeGalleryPhoto(direction) {
+            if (!galleryRoom) return;
+            const photos = galleryRoom.galleryImages || [galleryRoom.image];
+            galleryPhotoIndex = (galleryPhotoIndex + direction + photos.length) % photos.length;
+            renderGalleryPhoto();
+        }
+
+        function closeRoomGallery(event) {
+            if (event && event.target !== document.getElementById('roomGallery')) return;
+            document.getElementById('roomGallery').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function bookRoomFromGallery() {
+            if (!galleryRoom) return;
+            const selectedId = galleryRoom.id;
+            closeRoomGallery();
+            openBookingModal(selectedId);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            const galleryOpen = document.getElementById('roomGallery').style.display === 'flex';
+            if (!galleryOpen) return;
+            if (event.key === 'ArrowRight') changeGalleryPhoto(1);
+            if (event.key === 'ArrowLeft') changeGalleryPhoto(-1);
+            if (event.key === 'Escape') closeRoomGallery();
+        });
+
+        // Category Filter
+        function filterByCategory(category, btnElement) {
+            activeCategory = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            filterRooms();
+        }
+
+        // Combined Search & Category Filter
+        function filterRooms() {
+            const location = document.getElementById('searchLocation').value;
+            
+            const filtered = roomsData.filter(room => {
+                const matchLocation = (location === 'All') || (room.city === location);
+                const matchCategory = (activeCategory === 'All') || (room.category === activeCategory);
+                return matchLocation && matchCategory;
+            });
+
+            renderRooms(filtered);
+        }
+
+        // Calculate Nights between Check-in and Check-out
+        function getStayNights() {
+            const checkIn = new Date(document.getElementById('checkInDate').value);
+            const checkOut = new Date(document.getElementById('checkOutDate').value);
+            const diffTime = checkOut - checkIn;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays > 0 ? diffDays : 1;
+        }
+
+        // Open Booking Modal & Calculate Bill
+        function openBookingModal(roomId) {
+            currentSelectedRoom = roomsData.find(r => r.id === roomId);
+            const nights = getStayNights();
+            const baseTotal = currentSelectedRoom.price * nights;
+            const tax = Math.round(baseTotal * 0.12);
+            const grandTotal = baseTotal + tax;
+
+            document.getElementById('modalRoomTitle').innerText = currentSelectedRoom.title;
+            document.getElementById('modalRoomLocation').innerText = `${currentSelectedRoom.location} • ${nights} Night(s)`;
+            
+            document.getElementById('billNightsText').innerText = `₹${currentSelectedRoom.price.toLocaleString('en-IN')} x ${nights} Night(s)`;
+            document.getElementById('billBasePrice').innerText = `₹${baseTotal.toLocaleString('en-IN')}`;
+            document.getElementById('billTax').innerText = `₹${tax.toLocaleString('en-IN')}`;
+            document.getElementById('billTotal').innerText = `₹${grandTotal.toLocaleString('en-IN')}`;
+
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        // Handle Form Submission
+        function confirmBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('custName').value;
+            const total = document.getElementById('billTotal').innerText;
+            
+            alert(`Booking request demo\n\nThank you, ${name}!\nRoom: ${currentSelectedRoom.title}\nEstimated total: ${total}\n\nThis is a front-end demo. No payment was taken and no reservation or confirmation message was saved.`);
+            
+            document.getElementById('bookingForm').reset();
+            closeModal();
+        }
+    </script>
+</body>
+</html>
